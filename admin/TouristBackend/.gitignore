@@ -1,0 +1,17 @@
+# Node dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Upload folders
+uploads/
+
+# Admin panel dependencies
+admin/panel/node_modules/
+
+# Backend dependencies
+TouristBackend/node_modules/
+
+# Frontend dependencies
+Travel/react-frontend/node_modules/
