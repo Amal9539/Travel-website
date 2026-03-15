@@ -167,7 +167,7 @@ require("dotenv").config();
 const placeRoutes = require("./routes/placeRoutes");
 const authRoute = require("./routes/auth");
 const UserModel = require("./Models/User");
-
+const Tourist =require("./Models/Tourist")
 const passport = require("passport");
 const session = require("express-session");
 require("./config/passport");
@@ -325,6 +325,54 @@ app.delete("/delete/:id", async (req, res) => {
     res.status(400).json({ message: "Delete failed" });
   }
 });
+
+
+// 🔹 GET ALL PLACES
+app.get("/", (req, res) => {
+  TouristModel.find()
+    .then(data => res.json(data))
+    .catch(err => res.status(500).json(err));
+});
+
+// 🔹 CREATE
+app.post("/createtouristplaces", (req, res) => {
+  TouristModel.create(req.body)
+    .then(data => res.json(data))
+    .catch(err => res.status(500).json(err));
+});
+
+// 🔹 GET BY ID  ✅ (THIS WAS YOUR MAIN BUG)
+app.get("/gettourist/:id", (req, res) => {
+  TouristModel.findById(req.params.id)
+    .then(data => res.json(data))
+    .catch(err => res.status(500).json(err));
+});
+
+// 🔹 UPDATE
+app.put("/updatetourist/:id", (req, res) => {
+  TouristModel.findByIdAndUpdate(
+    req.params.id,
+    {
+      place: req.body.place,
+      location: req.body.location,
+      category:req.body.category,
+      descrption: req.body.descrption,
+    },
+    { new: true }
+  )
+    .then(data => res.json(data))
+    .catch(err => res.status(500).json(err));
+});
+
+
+
+
+app.delete('/delete/:id',(req,res)=>{
+  const id=req.params.id
+  TouristModel.findByIdAndDelete({_id:id})
+  .then(places=>res.json(places))
+  .catch(err=>res.json(err))
+})
 
 
 // ===== Start Server =====
