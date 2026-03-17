@@ -9,7 +9,7 @@
     
 //     const [details, setdetails] = useState([])
 //     useEffect(() => {
-//   axios.get("http://localhost:5000/api/package")
+//   axios.get("https://travel-website-5-62rm.onrender.com/api/package")
 //   .then((res)=> setdetails(res.data))
 //   .catch((err)=> console.log(err))
 // }, [])
@@ -20,7 +20,7 @@
 //         {filter.map((i)=>{
 //             return(
 //     <Card style={{ width: '18rem' }}>
-//       <Card.Img variant="top" src={`http://localhost:5000${i.image[0]}`} />
+//       <Card.Img variant="top" src={`https://travel-website-5-62rm.onrender.com${i.image[0]}`} />
 //       <Card.Body>
 //         <Card.Title>{i.packagename}</Card.Title>
 //         <Card.Text>
@@ -236,7 +236,7 @@ const Packagedetail = () => {
 
             {/* Left — Image */}
             <div className="pkg-image-side">
-              <img src={`http://localhost:5000${i.image[0]}`} alt={i.packagename} />
+              <img src={`https://travel-website-5-62rm.onrender.com${i.image[0]}`} alt={i.packagename} />
               <div className="pkg-image-overlay" />
             </div>
 

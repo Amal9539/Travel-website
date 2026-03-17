@@ -92,7 +92,7 @@ const TouristPlaces = () => {
                 {i.image ? (
                   <Card.Img
                     variant="top"
-                    src={`http://localhost:5000${i.image[0]}`}
+                    src={`https://travel-website-5-62rm.onrender.com${i.image[0]}`}
                     style={{ height: "180px", objectFit: "cover" }}
                   />
                 ) : (

@@ -37,7 +37,7 @@
 
 //     images.forEach(img => formData.append("image", img));
 
-//     axios.post("http://localhost:5000/tourist", formData)
+//     axios.post("https://travel-website-5-62rm.onrender.com/tourist", formData)
 //       .then((result) => {
 //         console.log(result.data);
 //         navigate('/view');
@@ -167,7 +167,7 @@ const Tourist = () => {
     formData.append("description", description);
     images.forEach(img => formData.append("image", img));
 
-    axios.post("http://localhost:5000/tourist", formData)
+    axios.post("https://travel-website-5-62rm.onrender.com/tourist", formData)
       .then((result) => {
         console.log(result.data);
         navigate('/view');

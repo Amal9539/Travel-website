@@ -8,7 +8,7 @@
 
 //   useEffect(() => {
 //     axios
-//       .get("http://localhost:5000/api/package")
+//       .get("https://travel-website-5-62rm.onrender.com/api/package")
 //       .then((res) => {
 //         console.log(res.data)
 //         setpackages(res.data)
@@ -22,7 +22,7 @@
 //     <div style={{display:"flex", gap:"20px", flexWrap:"wrap"}}>
 //       {packages.map((i) => (
 //         <Card style={{ width: '18rem' }} key={i._id}>
-//         <Card.Img variant="top" src={`http://localhost:5000${i.image[0]}`} />
+//         <Card.Img variant="top" src={`https://travel-website-5-62rm.onrender.com${i.image[0]}`} />
 
 //           <Card.Body>
 //             <Card.Title>{i.packagename}</Card.Title>
@@ -101,7 +101,7 @@ const TouristPackage = () => {
 
             <Card.Img
               variant="top"
-              src={`http://localhost:5000${i.image[0]}`}
+              src={`https://travel-website-5-62rm.onrender.com${i.image[0]}`}
               style={{
                 height:"180px",
                 objectFit:"cover"

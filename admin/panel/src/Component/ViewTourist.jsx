@@ -13,7 +13,7 @@
 //   // Fetch all places
 //   useEffect(() => {
 //     axios
-//       .get("http://localhost:5000/")
+//       .get("https://travel-website-5-62rm.onrender.com/")
 //       .then((res) => setData(res.data))
 //       .catch((err) => console.log(err));
 //   }, []);
@@ -21,7 +21,7 @@
 //   // Delete function
 //   const handledelete = (id) => {
 //     axios
-//       .delete(`http://localhost:5000/delete/${id}`)
+//       .delete(`https://travel-website-5-62rm.onrender.com/delete/${id}`)
 //       .then(() => {
 //         setData(data.filter((item) => item._id !== id));
 //       })
@@ -66,7 +66,7 @@
 //               <td>
 //                 {i.image && i.image.length > 0 ? (
 //                   <img
-//                     src={`http://localhost:5000${i.image[0]}`}
+//                     src={`https://travel-website-5-62rm.onrender.com${i.image[0]}`}
 //                     alt="place"
 //                     style={{
 //                       width: "70px",
@@ -113,14 +113,14 @@ const ViewTourist = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/")
+      .get("https://travel-website-5-62rm.onrender.com/")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   }, []);
 
   const handledelete = (id) => {
     axios
-      .delete(`http://localhost:5000/delete/${id}`)
+      .delete(`https://travel-website-5-62rm.onrender.com/delete/${id}`)
       .then(() => {
         setData(data.filter((item) => item._id !== id));
       })
@@ -288,7 +288,7 @@ const ViewTourist = () => {
                       <td style={{ padding: "16px" }}>
                         {i.image && i.image.length > 0 ? (
                           <img
-                            src={`http://localhost:5000${i.image[0]}`}
+                            src={`https://travel-website-5-62rm.onrender.com${i.image[0]}`}
                             alt="place"
                             style={{
                               width: 56, height: 56,

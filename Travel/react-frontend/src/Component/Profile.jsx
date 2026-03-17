@@ -12,7 +12,7 @@
 //   if (!userId) return alert("User ID not found");
 
 //   try {
-//     await axios.delete(`http://localhost:5000/api/auth/deleteuser/${userId}`, {
+//     await axios.delete(`https://travel-website-5-62rm.onrender.com/api/auth/deleteuser/${userId}`, {
 //       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
 //     });
 //     alert("Account deleted");

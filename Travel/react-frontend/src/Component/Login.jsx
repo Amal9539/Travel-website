@@ -11,7 +11,7 @@
 //   })
 //   const submit= async(e)=>{
 //     e.preventDefault()
-//     const res = await axios.post("http://localhost:5000/api/auth/login", data);
+//     const res = await axios.post("https://travel-website-5-62rm.onrender.com/api/auth/login", data);
 //     localStorage.setItem("token", res.data.token);
 //     localStorage.setItem("name", res.data.user.name);
 
@@ -69,7 +69,7 @@
 
 //   const submit = async (e) => {
 //     e.preventDefault()
-//     const res = await axios.post("http://localhost:5000/api/auth/login", data);
+//     const res = await axios.post("https://travel-website-5-62rm.onrender.com/api/auth/login", data);
 //     localStorage.setItem("token", res.data.token);
 //     localStorage.setItem("name", res.data.user.name);
 
@@ -188,7 +188,7 @@ const Login = () => {
   try {
 
     const res = await axios.post(
-      "http://localhost:5000/api/auth/login",
+      "https://travel-website-5-62rm.onrender.com/api/auth/login",
       data
     );
 

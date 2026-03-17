@@ -13,7 +13,7 @@
 
 // const fetchBookings = async ()=>{
 // try{
-// const res = await axios.get("http://localhost:5000/api/taxibookings")
+// const res = await axios.get("https://travel-website-5-62rm.onrender.com/api/taxibookings")
 // setBookings(res.data)
 // }catch(err){
 // console.log(err)
@@ -24,7 +24,7 @@
 // const handleStatusChange = async (id,status)=>{
 // try{
 
-// await axios.put(`http://localhost:5000/api/status/${id}`,{
+// await axios.put(`https://travel-website-5-62rm.onrender.com/api/status/${id}`,{
 // status:status
 // })
 
@@ -126,7 +126,7 @@ const AdminTaxiBookings = () => {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/taxibookings");
+      const res = await axios.get("https://travel-website-5-62rm.onrender.com/api/taxibookings");
       setBookings(res.data);
     } catch (err) {
       console.log(err);
@@ -135,7 +135,7 @@ const AdminTaxiBookings = () => {
 
   const handleStatusChange = async (id, status) => {
     try {
-      await axios.put(`http://localhost:5000/api/status/${id}`, {
+      await axios.put(`https://travel-website-5-62rm.onrender.com/api/status/${id}`, {
         status: status,
       });
       alert("Status Updated");

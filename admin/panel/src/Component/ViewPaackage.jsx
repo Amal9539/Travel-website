@@ -6,7 +6,7 @@
 // const ViewPaackage = () => {
 //     const [data, setdata] = useState([])
 //     useEffect(() => {
-//       axios.get("http://localhost:5000/api/package")
+//       axios.get("https://travel-website-5-62rm.onrender.com/api/package")
 //       .then((e)=>{
 //         setdata(e.data)
 //       })
@@ -51,7 +51,7 @@
 //           <td>
 //             {i.image && i.image.length > 0 && (
 //             <img
-//             src={`http://localhost:5000${i.image[0]}`}
+//             src={`https://travel-website-5-62rm.onrender.com${i.image[0]}`}
 //             width="80"
 //             alt="tour"
 //             />
@@ -76,7 +76,7 @@ const ViewPaackage = () => {
   const [data, setdata] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/package")
+    axios.get("https://travel-website-5-62rm.onrender.com/api/package")
       .then((e) => { setdata(e.data); })
       .catch((err) => { console.log(err); });
   }, []);
@@ -289,7 +289,7 @@ const ViewPaackage = () => {
                     <td style={{ padding: "14px 16px" }}>
                       {i.image && i.image.length > 0 ? (
                         <img
-                          src={`http://localhost:5000${i.image[0]}`}
+                          src={`https://travel-website-5-62rm.onrender.com${i.image[0]}`}
                           alt="tour"
                           style={{
                             width: 56, height: 56,

@@ -22,7 +22,7 @@
 //   // Fetch current place data
 //   useEffect(() => {
 //     axios
-//       .get(`http://localhost:5000/getplace/${id}`)
+//       .get(`https://travel-website-5-62rm.onrender.com/getplace/${id}`)
 //       .then((res) => {
 //         setPlace(res.data.place);
 //         setdistrict(res.data.district);
@@ -54,7 +54,7 @@
 //     }
 
 //     axios
-//       .put(`http://localhost:5000/update/${id}`, formData)
+//       .put(`https://travel-website-5-62rm.onrender.com/update/${id}`, formData)
 //       .then(() => {
 //         navigate("/view");
 //       })
@@ -155,7 +155,7 @@
 //                       {images.map((img, index) => (
 //                         <img
 //                           key={index}
-//                           src={`http://localhost:5000${img}`}
+//                           src={`https://travel-website-5-62rm.onrender.com${img}`}
 //                           alt="place"
 //                           style={styles.imagePreview}
 //                         />
@@ -212,7 +212,7 @@ const Update = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/getplace/${id}`)
+      .get(`https://travel-website-5-62rm.onrender.com/getplace/${id}`)
       .then((res) => {
         setPlace(res.data.place);
         setdistrict(res.data.district);
@@ -239,7 +239,7 @@ const Update = () => {
       formData.append("image", selectedImages[i]);
     }
     axios
-      .put(`http://localhost:5000/update/${id}`, formData)
+      .put(`https://travel-website-5-62rm.onrender.com/update/${id}`, formData)
       .then(() => { navigate("/view"); })
       .catch((err) => {
         console.error(err);
@@ -409,7 +409,7 @@ const Update = () => {
                   {images.map((img, index) => (
                     <div key={index} style={{ position: "relative" }}>
                       <img
-                        src={`http://localhost:5000${img}`}
+                        src={`https://travel-website-5-62rm.onrender.com${img}`}
                         alt="place"
                         style={{
                           width: 80, height: 80,

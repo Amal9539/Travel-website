@@ -7,7 +7,7 @@
 //   const [users, setUsers] = useState([]);
 
 //   useEffect(() => {
-//     axios.get("http://localhost:5000/api/users")
+//     axios.get("https://travel-website-5-62rm.onrender.com/api/users")
 //       .then(res => {
 //         setUsers(res.data);
 //       })
@@ -56,7 +56,7 @@ const Users = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/users")
+    axios.get("https://travel-website-5-62rm.onrender.com/api/users")
       .then(res => setUsers(res.data))
       .catch(err => console.log(err));
   }, []);

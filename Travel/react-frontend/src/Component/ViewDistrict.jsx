@@ -11,7 +11,7 @@
 
 //   useEffect(() => {
 //     axios
-//       .get("http://localhost:5000")
+//       .get("https://travel-website-5-62rm.onrender.com")
 //       .then((res) => setPlace(res.data))
 //       .catch((err) => console.log(err));
 //   }, []);
@@ -74,7 +74,7 @@
 //                   {/* Single Image */}
 //                   {i.image && i.image.length > 0 ? (
 //                     <img
-//                       src={`http://localhost:5000${i.image[0]}`}
+//                       src={`https://travel-website-5-62rm.onrender.com${i.image[0]}`}
 //                       style={styles.cardImg}
 //                       alt="place"
 //                     />
@@ -194,7 +194,7 @@ const ViewDistrict = () => {
                   <div style={{ position: "relative" }}>
                     {i.image && i.image.length > 0 ? (
                       <img
-                        src={`http://localhost:5000${i.image[0]}`}
+                        src={`https://travel-website-5-62rm.onrender.com${i.image[0]}`}
                         alt="place"
                         style={{
                           width: "100%", height: 200,

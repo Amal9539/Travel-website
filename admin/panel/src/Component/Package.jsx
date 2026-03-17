@@ -38,7 +38,7 @@
 //   })
 
 //   await axios.post(
-//     "http://localhost:5000/api/addpackages",
+//     "https://travel-website-5-62rm.onrender.com/api/addpackages",
 //     formData
 //   )
 //   navigate("/viewpackage")
@@ -168,7 +168,7 @@ const Package = () => {
     Object.keys(packages).forEach((key) => {
       formData.append(key, packages[key]);
     });
-    await axios.post("http://localhost:5000/api/addpackages", formData);
+    await axios.post("https://travel-website-5-62rm.onrender.com/api/addpackages", formData);
     navigate("/viewpackage");
   };
 
