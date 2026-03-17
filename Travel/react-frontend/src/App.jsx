@@ -21,10 +21,6 @@ import MyBookings from './Component/MyBookings';
 
 
 function App() {
-  useEffect(() => {
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0; // Safari fallback
-}, []);
   return (
     <GoogleOAuthProvider clientId="641386597689-kc2i9rcq6as8lgugdlk3seouv5qpqvqv.apps.googleusercontent.com">
     <BrowserRouter>

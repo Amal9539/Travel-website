@@ -125,6 +125,10 @@ const ViewDistrict = () => {
   const { name } = useParams();
   const navigate = useNavigate();
   const [place, setPlace] = useState([]);
+  useEffect(() => {
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0; // Safari fallback
+}, []);
 
   useEffect(() => {
     axios

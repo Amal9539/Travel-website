@@ -52,7 +52,7 @@
 
 // export default Profile;
 
-import React from "react";
+import React, { useEffect } from "react";
 import MyBookings from "./MyBookings";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -222,6 +222,10 @@ const Profile = () => {
       alert(error.response?.data?.message || "Delete failed");
     }
   };
+  useEffect(() => {
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0; // Safari fallback
+}, []);
 
   return (
     <div style={styles.page}>

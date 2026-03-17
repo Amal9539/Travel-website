@@ -59,6 +59,10 @@ import axios from "axios"
 
 const Packagedetail = () => {
   const { id } = useParams()
+  useEffect(() => {
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0; // Safari fallback
+}, []);
   const [details, setdetails] = useState([])
 
   useEffect(() => {

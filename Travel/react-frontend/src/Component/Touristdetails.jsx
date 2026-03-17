@@ -122,6 +122,10 @@ import { useParams } from 'react-router-dom'
 import { Carousel } from 'react-bootstrap'
 
 const Touristdetails = () => {
+  useEffect(() => {
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0; // Safari fallback
+}, []);
   const { id } = useParams()
   const [places, setplace] = useState([])
 
