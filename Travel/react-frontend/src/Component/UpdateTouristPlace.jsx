@@ -14,7 +14,7 @@ const UpdateTouristPlace = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/gettourist/${id}`)
+      .get(`https://travel-website-5-62rm.onrender.com/gettourist/${id}`)
       .then((places) => {
         setPlace(places.data.place);
         setLocation(places.data.location);
@@ -27,7 +27,7 @@ const UpdateTouristPlace = () => {
   const submit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:5000/updatetourist/${id}`, {
+      .put(`https://travel-website-5-62rm.onrender.com/updatetourist/${id}`, {
         place,
         location,
         category,

@@ -16,7 +16,7 @@ const TouristPlaces = () => {
   const fetchPlaces = async (page) => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/places?page=${page}&limit=${limit}`
+        `https://travel-website-5-62rm.onrender.com/places?page=${page}&limit=${limit}`
       );
       setPlaces(res.data.data);
       setTotalPages(res.data.totalPages);

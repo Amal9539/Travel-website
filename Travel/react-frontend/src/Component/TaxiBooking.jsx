@@ -174,7 +174,7 @@ const TaxiBooking = () => {
     e.preventDefault();
     if (!validate()) return;
     try {
-      await axios.post("http://localhost:5000/api/booktaxi", { ...data, userId });
+      await axios.post("https://travel-website-5-62rm.onrender.com/api/booktaxi", { ...data, userId });
       alert("Taxi Booked Successfully");
       setData({ pickup: "", destination: "", date: "", vehicle: "", phone: "" });
       setErrors({});

@@ -66,7 +66,7 @@ const Register = () => {
   e.preventDefault();
 
   try {
-    await axios.post("http://localhost:5000/api/auth/register", data);
+    await axios.post("https://travel-website-5-62rm.onrender.com/api/auth/register", data);
     alert("Registered successfully");
     navigate("/login");
   } catch (error) {

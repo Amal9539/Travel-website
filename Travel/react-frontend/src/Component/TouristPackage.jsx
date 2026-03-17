@@ -61,7 +61,7 @@ const TouristPackage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/package")
+      .get("https://travel-website-5-62rm.onrender.com/api/package")
       .then((res) => {
         console.log(res.data)
         setpackages(res.data)

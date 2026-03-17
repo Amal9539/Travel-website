@@ -128,7 +128,7 @@ const ViewDistrict = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000")
+      .get("https://travel-website-5-62rm.onrender.com")
       .then((res) => setPlace(res.data))
       .catch((err) => console.log(err));
   }, []);

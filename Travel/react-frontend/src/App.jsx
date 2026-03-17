@@ -37,6 +37,7 @@ function App() {
             <TouristPackage/>
             <TaxiBooking/>
             <Guid />
+           
 
           </>
         } />
@@ -50,7 +51,6 @@ function App() {
         <Route path="/booking" element={<MyBookings />} />
 
       </Routes>
-
       <Footer />
 
     </BrowserRouter>

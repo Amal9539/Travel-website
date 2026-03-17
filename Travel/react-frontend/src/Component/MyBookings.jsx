@@ -9,7 +9,7 @@ const MyBookings = () => {
   useEffect(() => {
 
     axios
-      .get(`http://localhost:5000/api/mybookings/${userId}`)
+      .get(`https://travel-website-5-62rm.onrender.com/api/mybookings/${userId}`)
       .then(res => setBookings(res.data))
       .catch(err => console.log(err));
 

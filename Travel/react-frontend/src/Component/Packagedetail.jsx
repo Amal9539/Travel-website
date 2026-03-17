@@ -62,7 +62,7 @@ const Packagedetail = () => {
   const [details, setdetails] = useState([])
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/package")
+    axios.get("https://travel-website-5-62rm.onrender.com/api/package")
       .then((res) => setdetails(res.data))
       .catch((err) => console.log(err))
   }, [])

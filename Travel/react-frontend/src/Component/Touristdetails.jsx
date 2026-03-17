@@ -126,7 +126,7 @@ const Touristdetails = () => {
   const [places, setplace] = useState([])
 
   useEffect(() => {
-    axios.get(`http://localhost:5000`)
+    axios.get(`https://travel-website-5-62rm.onrender.com`)
       .then(res => setplace(res.data))
       .catch(err => console.log(err))
   }, [])
