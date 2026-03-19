@@ -172,6 +172,8 @@ router.post("/login", async (req, res) => {
   }
 
 });
+
+
 // Google Login
 router.get(
   "/google",
@@ -182,7 +184,7 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "http://10.119.74.130:5174/login",
+    failureRedirect: "http://localhost:5174/login",
     session: false
   }),
   (req, res) => {
@@ -194,11 +196,9 @@ router.get(
     );
 
     const name = req.user.name;
-    const email = req.user.email;
-    const userId = req.user._id;
 
     res.redirect(
-      `http://10.119.74.130:5174/login?token=${token}&name=${name}&email=${email}&userId=${userId}`
+      `http://localhost:5174/login?token=${token}&name=${name}`
     );
   }
 );

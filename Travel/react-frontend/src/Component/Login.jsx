@@ -160,7 +160,7 @@ const Login = () => {
 
   // Google Login
   const googleLogin = () => {
-    window.open("http://10.119.74.130:5000/api/auth/google/", "_self");
+    window.open("http://localhost:5000/api/auth/google/", "_self");
   };
 
   // Handle Google Redirect
@@ -269,7 +269,7 @@ const Login = () => {
             </div>
 
             <Button
-              variant="danger"
+              variant="primery"
               className="w-100 py-2 rounded-3"
               onClick={googleLogin}
             >
