@@ -184,7 +184,7 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "http://localhost:5173/login",
+    failureRedirect: "https://travel-website-5-62rm.onrender.com/login",
     session: false
   }),
   (req, res) => {
@@ -196,9 +196,10 @@ router.get(
     );
 
     const name = req.user.name;
+    const email = req.user.email;
 
     res.redirect(
-      `http://localhost:5173/login?token=${token}&name=${name}`
+      `https://travel-website-5-62rm.onrender.com/login?token=${token}&name=${name}`
     );
   }
 );
