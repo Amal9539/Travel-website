@@ -160,8 +160,8 @@ const Login = () => {
 
   // Google Login
   const googleLogin = () => {
-  window.location.href = "https://travel-website-5-62rm.onrender.com/api/auth/google";
-};
+    window.open("https://travel-website-5-62rm.onrender.com/api/auth/google", "_self");
+  };
 
   // Handle Google Redirect
   useEffect(() => {
