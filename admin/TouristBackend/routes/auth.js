@@ -204,16 +204,27 @@ router.get(
 );
 router.delete("/deleteuser/:id", async (req, res) => {
   try {
-
     const userId = req.params.id;
 
-    await User.findByIdAndDelete(userId);
+    console.log("Deleting user:", userId);
+
+    // ✅ FIX: validate ID
+    const mongoose = require("mongoose");
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
     res.json({ message: "User deleted successfully" });
 
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 });
-
 module.exports = router;

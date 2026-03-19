@@ -52,7 +52,8 @@
 
 // export default Profile;
 
-import React, { useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
 import MyBookings from "./MyBookings";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -99,7 +100,6 @@ const styles = {
     padding: "28px",
     marginBottom: "16px",
   },
-  // Horizontal profile row: avatar + info fields side by side
   profileRow: {
     display: "flex",
     alignItems: "center",
@@ -198,34 +198,80 @@ const styles = {
     fontFamily: "'DM Sans', sans-serif",
     whiteSpace: "nowrap",
     flexShrink: 0,
+    opacity: 1,
+  },
+  deleteBtnDisabled: {
+    opacity: 0.6,
+    cursor: "not-allowed",
   },
 };
 
 const Profile = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const name = localStorage.getItem("name");
   const email = localStorage.getItem("email");
   const initials = name ? name.charAt(0).toUpperCase() : "?";
 
+  // ✅ FIXED DELETE FUNCTION
   const deleteAccount = async () => {
-    const userId = localStorage.getItem("userId");
-    if (!userId) return alert("User ID not found");
+    const userId = localStorage.getItem("userId")?.trim();
+    const token = localStorage.getItem("token");
+
+    if (!userId) {
+      alert("User ID not found. Please login again.");
+      return;
+    }
+
+    const confirmDelete = window.confirm(
+      "Are you sure you want to permanently delete your account?"
+    );
+    if (!confirmDelete) return;
 
     try {
-      await axios.delete(`https://travel-website-5-62rm.onrender.com/api/auth/deleteuser/${userId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
-      alert("Account deleted");
-      localStorage.clear();
-      navigate("/register");
+      setLoading(true);
+
+      const res = await axios.delete(
+        `https://travel-website-5-62rm.onrender.com/api/auth/deleteuser/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert(res.data?.message || "Account deleted successfully");
+
+      // clear only user data
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("name");
+      localStorage.removeItem("email");
+
+      navigate("/register", { replace: true });
+
     } catch (error) {
-      alert(error.response?.data?.message || "Delete failed");
+      console.error(error);
+
+      if (error.response?.status === 401) {
+        alert("Session expired. Please login again.");
+        navigate("/login");
+      } else if (error.response?.status === 404) {
+        alert("User not found.");
+      } else {
+        alert(error.response?.data?.message || "Delete failed");
+      }
+
+    } finally {
+      setLoading(false);
     }
   };
+
   useEffect(() => {
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0; // Safari fallback
-}, []);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, []);
 
   return (
     <div style={styles.page}>
@@ -237,7 +283,7 @@ const Profile = () => {
           <p style={styles.headerSub}>Manage your account and bookings</p>
         </div>
 
-        {/* Info Card — horizontal layout */}
+        {/* Profile Card */}
         <div style={styles.card}>
           <div style={styles.profileRow}>
             <div style={styles.avatar}>{initials}</div>
@@ -257,13 +303,13 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Bookings Card */}
+        {/* Bookings */}
         <div style={styles.card}>
           <div style={styles.sectionTitle}>My Bookings</div>
           <MyBookings />
         </div>
 
-        {/* Danger Zone — horizontal layout */}
+        {/* Danger Zone */}
         <div style={styles.dangerCard}>
           <div style={styles.dangerRow}>
             <div>
@@ -272,9 +318,18 @@ const Profile = () => {
                 Permanently delete your account and all associated data. This action cannot be undone.
               </p>
             </div>
-            <button onClick={deleteAccount} style={styles.deleteBtn}>
-              Delete Account
+
+            <button
+              onClick={deleteAccount}
+              disabled={loading}
+              style={{
+                ...styles.deleteBtn,
+                ...(loading ? styles.deleteBtnDisabled : {}),
+              }}
+            >
+              {loading ? "Deleting..." : "Delete Account"}
             </button>
+
           </div>
         </div>
 
