@@ -184,7 +184,7 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "http://localhost:5174/login",
+    failureRedirect: "http://localhost:5173/login",
     session: false
   }),
   (req, res) => {
@@ -198,7 +198,7 @@ router.get(
     const name = req.user.name;
 
     res.redirect(
-      `http://localhost:5174/login?token=${token}&name=${name}`
+      `http://localhost:5173/login?token=${token}&name=${name}`
     );
   }
 );
