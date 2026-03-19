@@ -256,7 +256,7 @@ const Login = () => {
               </div>
 
               <Button
-                variant="primary"
+                variant="danger"
                 type="submit"
                 className="w-100 py-2 rounded-3"
               >
