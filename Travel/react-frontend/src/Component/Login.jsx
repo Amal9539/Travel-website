@@ -256,7 +256,7 @@ const Login = () => {
               </div>
 
               <Button
-                variant="danger"
+                variant="primary"
                 type="submit"
                 className="w-100 py-2 rounded-3"
               >
@@ -269,7 +269,7 @@ const Login = () => {
             </div>
 
             <Button
-              variant="primery"
+              variant="danger"
               className="w-100 py-2 rounded-3"
               onClick={googleLogin}
             >
