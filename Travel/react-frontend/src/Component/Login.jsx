@@ -160,7 +160,7 @@ const Login = () => {
 
   // Google Login
   const googleLogin = () => {
-    window.open("http://localhost:5000/api/auth/google/", "_self");
+    window.open("http://10.119.74.130:5000/api/auth/google/", "_self");
   };
 
   // Handle Google Redirect
