@@ -51,6 +51,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
+import { useEffect } from 'react';
 
 const Register = () => {
   const navigate = useNavigate()

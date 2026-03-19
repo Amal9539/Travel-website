@@ -184,7 +184,7 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "http://localhost:5174/login",
+    failureRedirect:  "https://travel-website-tourisam.vercel.app/login",
     session: false
   }),
   (req, res) => {
@@ -198,8 +198,8 @@ router.get(
     const name = req.user.name;
 
     res.redirect(
-      `http://localhost:5174/login?token=${token}&name=${name}`
-    );
+  `https://travel-website-tourisam.vercel.app/login?token=${token}&name=${name}&email=${email}&userId=${userId}`
+);
   }
 );
 router.delete("/deleteuser/:id", async (req, res) => {
