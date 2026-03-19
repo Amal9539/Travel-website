@@ -54,6 +54,10 @@ import Card from 'react-bootstrap/Card';
 
 const Register = () => {
   const navigate = useNavigate()
+   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0; // Safari fallback
+  }, []);
 
   const [data, setdata] = useState({
     name: "",
