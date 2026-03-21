@@ -384,9 +384,13 @@ router.get("/profile", authMiddleware, async (req, res) => {
 
 
 // DELETE USER (optional protect)
-router.delete("/deleteuser/me", async (req, res) => {
+router.delete("/deleteuser/:id", authMiddleware, async (req, res) => {
   try {
-    const userId = req.user; // 🔥 from token
+    const userId = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
 
     const user = await User.findByIdAndDelete(userId);
 
@@ -397,8 +401,10 @@ router.delete("/deleteuser/me", async (req, res) => {
     res.json({ message: "User deleted successfully" });
 
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 });
+
 
 module.exports = router;

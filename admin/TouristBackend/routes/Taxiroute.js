@@ -55,14 +55,20 @@ const TaxiBooking = require("../Models/TaxiBooking");
 
 // Create booking
 router.post("/booktaxi", async (req, res) => {
-  const userId = req.user; // 🔥 from token
+  try {
 
-  const booking = await Booking.create({
-    ...req.body,
-    userId,
-  });
+    const booking = new TaxiBooking({
+      ...req.body,
+      user: req.body.userId
+    });
 
-  res.json(booking);
+    await booking.save();
+
+    res.json({ message: "Taxi booked successfully" });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 
