@@ -184,13 +184,13 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "https://travel-website-tourisam.vercel.app/login",
+    failureRedirect: "https://travel-website-tourisam.vercel.app/login", // ✅ FIXED
     session: false
   }),
   (req, res) => {
 
     const token = jwt.sign(
-      { userId: req.user._id }, // ✅ FIXED
+      { id: req.user._id },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
@@ -200,7 +200,7 @@ router.get(
 
     res.redirect(
       `https://travel-website-tourisam.vercel.app/login?token=${token}&name=${name}&email=${email}`
-    );
+    ); // ✅ FIXED
   }
 );
 router.delete("/deleteuser/:id", async (req, res) => {
