@@ -53,6 +53,7 @@
 // }
 
 // export default Packagedetail
+
 import React, { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom"
 import axios from "axios"
@@ -60,9 +61,9 @@ import axios from "axios"
 const Packagedetail = () => {
   const { id } = useParams()
   useEffect(() => {
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0; // Safari fallback
-}, []);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, []);
   const [details, setdetails] = useState([])
 
   useEffect(() => {
@@ -83,7 +84,7 @@ const Packagedetail = () => {
           background: #f0f4ff;
           font-family: 'Outfit', sans-serif;
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           justify-content: center;
           padding: 48px 24px;
           box-sizing: border-box;
@@ -91,8 +92,9 @@ const Packagedetail = () => {
 
         .pkg-card {
           display: flex;
+          flex-direction: column;
           width: 100%;
-          max-width: 1280px;
+          max-width: 900px;
           background: #ffffff;
           border-radius: 20px;
           border: 1px solid #dde3f5;
@@ -106,14 +108,16 @@ const Packagedetail = () => {
           to   { opacity: 1; transform: translateY(0); }
         }
 
-        .pkg-image-side {
-          width: 52%;
-          flex-shrink: 0;
+        /* ── TOP: Image ── */
+        .pkg-image-top {
+          width: 100%;
+          height: 420px;
           position: relative;
           overflow: hidden;
+          flex-shrink: 0;
         }
 
-        .pkg-image-side img {
+        .pkg-image-top img {
           width: 100%;
           height: 100%;
           object-fit: cover;
@@ -121,23 +125,22 @@ const Packagedetail = () => {
           transition: transform 0.5s ease;
         }
 
-        .pkg-image-side:hover img {
+        .pkg-image-top:hover img {
           transform: scale(1.04);
         }
 
         .pkg-image-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to right, transparent 60%, rgba(255,255,255,0.08));
+          background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.18));
           pointer-events: none;
         }
 
-        .pkg-content-side {
-          flex: 1;
-          padding: 40px 40px;
+        /* ── BOTTOM: Content ── */
+        .pkg-content-bottom {
+          padding: 36px 40px 40px;
           display: flex;
           flex-direction: column;
-          overflow-y: auto;
         }
 
         .pkg-tag {
@@ -196,7 +199,7 @@ const Packagedetail = () => {
 
         .pkg-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(4, 1fr);
           gap: 14px 24px;
           margin-bottom: 24px;
         }
@@ -230,7 +233,6 @@ const Packagedetail = () => {
           color: #4a4a6a;
           line-height: 1.7;
           font-weight: 300;
-          margin-top: auto;
         }
       `}</style>
 
@@ -238,14 +240,14 @@ const Packagedetail = () => {
         {filter.map((i) => (
           <div className="pkg-card" key={i._id}>
 
-            {/* Left — Image */}
-            <div className="pkg-image-side">
+            {/* TOP — Image */}
+            <div className="pkg-image-top">
               <img src={`https://travel-website-5-62rm.onrender.com${i.image[0]}`} alt={i.packagename} />
               <div className="pkg-image-overlay" />
             </div>
 
-            {/* Right — Content */}
-            <div className="pkg-content-side">
+            {/* BOTTOM — Content */}
+            <div className="pkg-content-bottom">
               <div className="pkg-tag">Travel Package</div>
 
               <h1 className="pkg-title">{i.packagename}</h1>
