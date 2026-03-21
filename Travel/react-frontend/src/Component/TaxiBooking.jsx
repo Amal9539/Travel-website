@@ -148,7 +148,6 @@ const TaxiBooking = () => {
   const [errors, setErrors] = useState({});
   const [theme, setTheme] = useState("light");
 
-  const userId = localStorage.getItem("userId");
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -171,18 +170,50 @@ const TaxiBooking = () => {
   };
 
   const bookTaxi = async (e) => {
-    e.preventDefault();
-    if (!validate()) return;
-    try {
-      await axios.post("https://travel-website-5-62rm.onrender.com/api/booktaxi", { ...data, userId });
-      alert("Taxi Booked Successfully");
-      setData({ pickup: "", destination: "", date: "", vehicle: "", phone: "" });
-      setErrors({});
-    } catch (err) {
-      console.log(err);
-      alert("Booking Failed");
+  e.preventDefault();
+
+  if (!validate()) return;
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    alert("Please login first");
+    return;
+  }
+
+  try {
+    await axios.post(
+      "https://travel-website-5-62rm.onrender.com/api/booktaxi",
+      data, // ✅ NO userId
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // 🔥 important
+        },
+      }
+    );
+
+    alert("Taxi Booked Successfully");
+
+    setData({
+      pickup: "",
+      destination: "",
+      date: "",
+      vehicle: "",
+      phone: "",
+    });
+
+    setErrors({});
+
+  } catch (err) {
+    console.log(err);
+
+    if (err.response?.status === 401) {
+      alert("Session expired. Please login again.");
+    } else {
+      alert(err.response?.data?.message || "Booking Failed");
     }
-  };
+  }
+};
 
   const isDark = theme === "dark";
 

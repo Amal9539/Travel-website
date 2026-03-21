@@ -52,7 +52,6 @@
 
 // export default Profile;
 
-
 import React, { useEffect, useState } from "react";
 import MyBookings from "./MyBookings";
 import axios from "axios";
@@ -197,8 +196,6 @@ const styles = {
     cursor: "pointer",
     fontFamily: "'DM Sans', sans-serif",
     whiteSpace: "nowrap",
-    flexShrink: 0,
-    opacity: 1,
   },
   deleteBtnDisabled: {
     opacity: 0.6,
@@ -212,15 +209,15 @@ const Profile = () => {
 
   const name = localStorage.getItem("name");
   const email = localStorage.getItem("email");
+  const token = localStorage.getItem("token");
+
   const initials = name ? name.charAt(0).toUpperCase() : "?";
 
-  // ✅ FIXED DELETE FUNCTION
+  // 🔥 FIXED DELETE (NO userId)
   const deleteAccount = async () => {
-    const userId = localStorage.getItem("userId")?.trim();
-    const token = localStorage.getItem("token");
-
-    if (!userId) {
-      alert("User ID not found. Please login again.");
+    if (!token) {
+      alert("Please login again.");
+      navigate("/login");
       return;
     }
 
@@ -233,22 +230,17 @@ const Profile = () => {
       setLoading(true);
 
       const res = await axios.delete(
-        `https://travel-website-5-62rm.onrender.com/api/auth/deleteuser/${userId}`,
+        "https://travel-website-5-62rm.onrender.com/api/auth/deleteuser/me",
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`, // ✅ correct
           },
         }
       );
 
       alert(res.data?.message || "Account deleted successfully");
 
-      // clear only user data
-      localStorage.removeItem("token");
-      localStorage.removeItem("userId");
-      localStorage.removeItem("name");
-      localStorage.removeItem("email");
-
+      localStorage.clear();
       navigate("/register", { replace: true });
 
     } catch (error) {
@@ -256,9 +248,8 @@ const Profile = () => {
 
       if (error.response?.status === 401) {
         alert("Session expired. Please login again.");
+        localStorage.clear();
         navigate("/login");
-      } else if (error.response?.status === 404) {
-        alert("User not found.");
       } else {
         alert(error.response?.data?.message || "Delete failed");
       }
@@ -277,13 +268,11 @@ const Profile = () => {
     <div style={styles.page}>
       <div style={styles.wrapper}>
 
-        {/* Header */}
         <div style={styles.header}>
           <h2 style={styles.headerTitle}>My Profile</h2>
           <p style={styles.headerSub}>Manage your account and bookings</p>
         </div>
 
-        {/* Profile Card */}
         <div style={styles.card}>
           <div style={styles.profileRow}>
             <div style={styles.avatar}>{initials}</div>
@@ -303,19 +292,17 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Bookings */}
         <div style={styles.card}>
           <div style={styles.sectionTitle}>My Bookings</div>
           <MyBookings />
         </div>
 
-        {/* Danger Zone */}
         <div style={styles.dangerCard}>
           <div style={styles.dangerRow}>
             <div>
               <div style={styles.dangerSectionTitle}>Danger Zone</div>
               <p style={styles.dangerText}>
-                Permanently delete your account and all associated data. This action cannot be undone.
+                Permanently delete your account and all associated data.
               </p>
             </div>
 
@@ -329,7 +316,6 @@ const Profile = () => {
             >
               {loading ? "Deleting..." : "Delete Account"}
             </button>
-
           </div>
         </div>
 

@@ -91,19 +91,188 @@
 // module.exports = router;
 
 
+// const express = require('express');
+// const router = express.Router();
+// const bcrypt = require('bcryptjs');
+// const jwt = require("jsonwebtoken");
+// const passport = require("passport");
+
+// const User = require("../Models/User");
+
+
+// // REGISTER
+// router.post('/register', async (req, res) => {
+//   try {
+
+//     const { name, email, phone, password } = req.body;
+
+//     const existingUser = await User.findOne({ email });
+
+//     if (existingUser) {
+//       return res.status(400).json({ message: "Email already registered" });
+//     }
+
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     const user = new User({
+//       name,
+//       email,
+//       phone,
+//       password: hashedPassword
+//     });
+
+//     await user.save();
+
+//     res.json({ message: "User registered successfully" });
+
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ message: "Register failed" });
+//   }
+// });
+
+
+// // LOGIN
+// router.post("/login", async (req, res) => {
+
+//   try {
+
+//     const { email, password } = req.body;
+
+//     const user = await User.findOne({ email });
+
+//     if (!user) {
+//       return res.status(400).json({ message: "User not found" });
+//     }
+
+//     const isMatch = await bcrypt.compare(password, user.password);
+
+//     if (!isMatch) {
+//       return res.status(400).json({ message: "Invalid password" });
+//     }
+
+//     const token = jwt.sign(
+//       { id: user._id },
+//       process.env.JWT_SECRET || "secretkey",
+//       { expiresIn: "7d" }
+//     );
+
+//     res.json({
+//       token,
+//       user: {
+//         id: user._id,
+//         name: user.name,
+//         email: user.email,
+//         phone:user.phone
+//       }
+//     });
+
+//   } catch (error) {
+//     res.status(500).json({ message: "Login failed" });
+//   }
+
+// });
+
+
+// // Google Login
+// router.get(
+//   "/google",
+//   passport.authenticate("google", { scope: ["profile", "email"] })
+// );
+
+// // Google Callback
+// router.get(
+//   "/google/callback",
+//   passport.authenticate("google", {
+//     failureRedirect: "https://travel-website-tourisam.vercel.app/login",
+//     session: false
+//   }),
+//   (req, res) => {
+
+//     const token = jwt.sign(
+//       { userId: req.user._id }, // ✅ FIXED
+//       process.env.JWT_SECRET,
+//       { expiresIn: "1d" }
+//     );
+
+//     const name = req.user.name;
+//     const email = req.user.email;
+
+//     res.redirect(
+//       `https://travel-website-tourisam.vercel.app/login?token=${token}&name=${name}&email=${email}`
+//     );
+//   }
+// );
+// router.delete("/deleteuser/:id", async (req, res) => {
+//   try {
+//     const userId = req.params.id;
+
+//     console.log("Deleting user:", userId);
+
+//     // ✅ FIX: validate ID
+//     const mongoose = require("mongoose");
+//     if (!mongoose.Types.ObjectId.isValid(userId)) {
+//       return res.status(400).json({ message: "Invalid user ID" });
+//     }
+
+//     const user = await User.findByIdAndDelete(userId);
+
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     res.json({ message: "User deleted successfully" });
+
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+// module.exports = router;
+
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
+const mongoose = require("mongoose");
 
 const User = require("../Models/User");
+
+
+// 🔐 AUTH MIDDLEWARE (ADDED)
+const authMiddleware = (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+      return res.status(401).json({ message: "No token" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    console.log("DECODED:", decoded); // ✅ debug
+
+    req.user = decoded.userId; // 🔥 IMPORTANT FIX
+
+    if (!req.user) {
+      return res.status(401).json({ message: "Invalid user id" });
+    }
+
+    next();
+
+  } catch (error) {
+    console.log(error);
+    return res.status(401).json({ message: "Invalid user id" });
+  }
+};
 
 
 // REGISTER
 router.post('/register', async (req, res) => {
   try {
-
     const { name, email, phone, password } = req.body;
 
     const existingUser = await User.findOne({ email });
@@ -132,11 +301,9 @@ router.post('/register', async (req, res) => {
 });
 
 
-// LOGIN
+// LOGIN (✅ FIXED)
 router.post("/login", async (req, res) => {
-
   try {
-
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
@@ -152,35 +319,35 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET || "secretkey",
+      { userId: user._id }, // 🔥 FIXED (important)
+      process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
 
     res.json({
       token,
       user: {
-        id: user._id,
+        userId: user._id,
         name: user.name,
         email: user.email,
-        phone:user.phone
+        phone: user.phone
       }
     });
 
   } catch (error) {
     res.status(500).json({ message: "Login failed" });
   }
-
 });
 
 
-// Google Login
+// GOOGLE LOGIN
 router.get(
   "/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-// Google Callback
+
+// GOOGLE CALLBACK (✅ FIXED)
 router.get(
   "/google/callback",
   passport.authenticate("google", {
@@ -190,7 +357,7 @@ router.get(
   (req, res) => {
 
     const token = jwt.sign(
-      { userId: req.user._id }, // ✅ FIXED
+      { userId: req.user._id }, // 🔥 FIXED
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
@@ -203,17 +370,23 @@ router.get(
     );
   }
 );
-router.delete("/deleteuser/:id", async (req, res) => {
+
+
+// 🧑‍💻 PROTECTED ROUTE EXAMPLE
+router.get("/profile", authMiddleware, async (req, res) => {
   try {
-    const userId = req.params.id;
+    const user = await User.findById(req.user);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch user" });
+  }
+});
 
-    console.log("Deleting user:", userId);
 
-    // ✅ FIX: validate ID
-    const mongoose = require("mongoose");
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res.status(400).json({ message: "Invalid user ID" });
-    }
+// DELETE USER (optional protect)
+router.delete("/deleteuser/me", async (req, res) => {
+  try {
+    const userId = req.user; // 🔥 from token
 
     const user = await User.findByIdAndDelete(userId);
 
@@ -224,8 +397,8 @@ router.delete("/deleteuser/:id", async (req, res) => {
     res.json({ message: "User deleted successfully" });
 
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: error.message });
   }
 });
+
 module.exports = router;
