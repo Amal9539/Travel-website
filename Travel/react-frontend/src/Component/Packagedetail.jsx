@@ -86,7 +86,7 @@ const Packagedetail = () => {
           display: flex;
           align-items: flex-start;
           justify-content: center;
-          padding: 48px 24px;
+          padding: 24px 16px;
           box-sizing: border-box;
         }
 
@@ -96,9 +96,9 @@ const Packagedetail = () => {
           width: 100%;
           max-width: 900px;
           background: #ffffff;
-          border-radius: 20px;
+          border-radius: 16px;
           border: 1px solid #dde3f5;
-          box-shadow: 0 16px 48px rgba(99,102,241,0.10);
+          box-shadow: 0 8px 32px rgba(99,102,241,0.10);
           overflow: hidden;
           animation: fadeUp 0.4s ease both;
         }
@@ -108,10 +108,9 @@ const Packagedetail = () => {
           to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── TOP: Image ── */
         .pkg-image-top {
           width: 100%;
-          height: 420px;
+          height: 340px;
           position: relative;
           overflow: hidden;
           flex-shrink: 0;
@@ -136,11 +135,11 @@ const Packagedetail = () => {
           pointer-events: none;
         }
 
-        /* ── BOTTOM: Content ── */
         .pkg-content-bottom {
-          padding: 36px 40px 40px;
+          padding: 20px 24px 24px;
           display: flex;
           flex-direction: column;
+          gap: 10px;
         }
 
         .pkg-tag {
@@ -153,38 +152,37 @@ const Packagedetail = () => {
           background: rgba(99,102,241,0.08);
           border: 1px solid rgba(99,102,241,0.18);
           border-radius: 20px;
-          padding: 4px 12px;
-          margin-bottom: 14px;
+          padding: 3px 10px;
           width: fit-content;
         }
 
         .pkg-title {
           font-family: 'Playfair Display', serif;
-          font-size: 28px;
+          font-size: 24px;
           font-weight: 700;
           color: #1a1a2e;
-          margin: 0 0 6px;
+          margin: 0;
           letter-spacing: -0.3px;
           line-height: 1.3;
         }
 
         .pkg-destination {
-          font-size: 13px;
+          font-size: 12px;
           color: #a0a0b8;
-          margin: 0 0 16px;
+          margin: 0;
           font-weight: 300;
         }
 
         .pkg-price {
-          font-size: 30px;
+          font-size: 26px;
           font-weight: 600;
           color: #16a34a;
-          margin: 0 0 24px;
+          margin: 0;
           letter-spacing: -0.5px;
         }
 
         .pkg-price span {
-          font-size: 14px;
+          font-size: 13px;
           color: #a0a0b8;
           font-weight: 300;
           margin-left: 4px;
@@ -194,24 +192,28 @@ const Packagedetail = () => {
           width: 100%;
           height: 1px;
           background: linear-gradient(90deg, #e8ecfa, transparent);
-          margin-bottom: 24px;
         }
 
         .pkg-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 14px 24px;
-          margin-bottom: 24px;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px 16px;
+        }
+
+        @media (min-width: 600px) {
+          .pkg-grid {
+            grid-template-columns: repeat(4, 1fr);
+          }
         }
 
         .pkg-field {
           display: flex;
           flex-direction: column;
-          gap: 3px;
+          gap: 2px;
         }
 
         .pkg-field-label {
-          font-size: 10px;
+          font-size: 9px;
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.09em;
@@ -219,7 +221,7 @@ const Packagedetail = () => {
         }
 
         .pkg-field-value {
-          font-size: 14px;
+          font-size: 13px;
           color: #2d2d44;
           font-weight: 400;
         }
@@ -228,10 +230,10 @@ const Packagedetail = () => {
           background: #f5f7ff;
           border-left: 3px solid #6366f1;
           border-radius: 0 8px 8px 0;
-          padding: 12px 16px;
-          font-size: 13px;
+          padding: 10px 14px;
+          font-size: 12px;
           color: #4a4a6a;
-          line-height: 1.7;
+          line-height: 1.6;
           font-weight: 300;
         }
       `}</style>
