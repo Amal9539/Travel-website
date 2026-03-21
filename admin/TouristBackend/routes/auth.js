@@ -184,11 +184,10 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "https://travel-website-5-62rm.onrender.com/login",
+    failureRedirect: "http://localhost:5173/login",
     session: false
   }),
   (req, res) => {
-
     const token = jwt.sign(
       { id: req.user._id },
       process.env.JWT_SECRET,
@@ -196,10 +195,9 @@ router.get(
     );
 
     const name = req.user.name;
-    const email = req.user.email;
 
     res.redirect(
-      `https://travel-website-5-62rm.onrender.com/login?token=${token}&name=${name}`
+      `http://localhost:5173/login?token=${token}&name=${name}`
     );
   }
 );
