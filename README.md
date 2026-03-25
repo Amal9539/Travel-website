@@ -1,4 +1,4 @@
-🌍 Travel-Website
+🌍 TravelNest
 A full-stack travel booking and exploration platform built using the MERN (MongoDB, Express.js, React, Node.js) stack. This application allows users to discover exotic destinations, view detailed itineraries, and manage their travel bookings seamlessly.
 
 🚀 Key Features
