@@ -7,16 +7,20 @@ import AdminTaxiBookings from "./Component/AdminTaxiBookings";
 import Package from "./Component/Package";
 import ViewPaackage from "./Component/ViewPaackage";
 import Users from "./Component/Users";
+import Home from "./Component/Home";
 
 
 function App() {
   return (
     <BrowserRouter>
       <div>
+        
         <Sidebar />
+        
 
         <div >
           <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/touristplace" element={<Tourist />} />
             <Route path="/view" element={<ViewTourist />} />
             <Route path="/update/:id"element={<Update/>}/>

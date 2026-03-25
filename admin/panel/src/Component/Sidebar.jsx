@@ -292,9 +292,9 @@ const Sidebar = () => {
     { text: "Taxibooking",    icon: <ExploreIcon />, path: "/taxi" },
     { text: "Tourist Package",icon: <ExploreIcon />, path: "/viewpackage" },
     { text: "Users",          icon: <ExploreIcon />, path: "/users" },
-    { text: "Orders",         icon: <ShoppingCartIcon />, path: "/orders" },
-    { text: "Customers",      icon: <PeopleIcon />,  path: "/customers" },
-    { text: "Settings",       icon: <SettingsIcon />,path: "/settings" },
+    // { text: "Orders",         icon: <ShoppingCartIcon />, path: "/orders" },
+    // { text: "Customers",      icon: <PeopleIcon />,  path: "/customers" },
+    // { text: "Settings",       icon: <SettingsIcon />,path: "/settings" },
   ];
 
   const list = () => (
@@ -330,7 +330,7 @@ const Sidebar = () => {
               fontSize: "20px", fontWeight: 800, color: "#fff",
               letterSpacing: "-0.4px", fontFamily: "'Outfit', sans-serif",
             }}>
-              Travel Hub
+              Admin TravelNest
             </Box>
             <Box sx={{
               fontSize: "10px", fontWeight: 500,
@@ -411,7 +411,7 @@ const Sidebar = () => {
           fontSize: "12px", color: "#94a3b8",
           fontFamily: "'Outfit', sans-serif",
         }}>
-          © 2024 Travel Hub
+          © 2024 TravelNest
         </Box>
       </Box>
     </Box>
@@ -473,7 +473,7 @@ const Sidebar = () => {
             fontSize: "17px", fontWeight: 700, color: "#0d47a1",
             letterSpacing: "-0.3px", fontFamily: "'Outfit', sans-serif",
           }}>
-            Travel Hub
+            TravelNest
           </Box>
         </Box>
 
@@ -500,6 +500,7 @@ const Sidebar = () => {
       >
         {list()}
       </Drawer>
+      
     </>
   );
 };
